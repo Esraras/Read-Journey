@@ -1,0 +1,417 @@
+    /* Base / Mobile First Styles (< 768px) */
+.pageContainer {
+  min-height: 100vh;
+  background-color: #0c0c0c;
+  color: #fcfcfc;
+  padding: 20px 20px 40px 20px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.dashboardLayout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 1216px;
+  margin: 0 auto;
+}
+
+/* Header Component */
+.header {
+  background-color: #1f1f1f;
+  border-radius: 15px;
+  padding: 11px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: -0.02em;
+}
+
+.desktopNav {
+  display: none;
+}
+
+.userBlock {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: #262626;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.userName {
+  display: none;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.logoutBtn {
+  display: none;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fcfcfc;
+  border-radius: 30px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.burgerBtn {
+  background: none;
+  border: none;
+  color: #fcfcfc;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+/* Sidebar / Dashboard Controls */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.filterCard {
+  background-color: #1f1f1f;
+  border-radius: 30px;
+  padding: 20px;
+}
+
+.filterTitle {
+  font-size: 12px;
+  color: #fcfcfc;
+  margin-bottom: 8px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inputGroup {
+  display: flex;
+  align-items: center;
+  background-color: #262626;
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
+.inputLabel {
+  color: #686868;
+  font-size: 12px;
+  margin-right: 8px;
+  white-space: nowrap;
+}
+
+.input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fcfcfc;
+  font-size: 12px;
+}
+
+.applyBtn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fcfcfc;
+  border-radius: 30px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  align-self: flex-start;
+  margin-top: 12px;
+}
+
+/* Workout Guide Card */
+.workoutCard {
+  background-color: #262626;
+  border-radius: 30px;
+  padding: 20px;
+}
+
+.workoutTitle {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.stepsList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.stepItem {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.stepNumber {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #fcfcfc;
+  color: #1f1f1f;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stepText {
+  font-size: 12px;
+  line-height: 1.33;
+  color: #686868;
+}
+
+.stepText highlight {
+  color: #fcfcfc;
+  font-weight: 600;
+}
+
+.myLibraryLink {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #686868;
+  font-size: 12px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Quote Card */
+.quoteCard {
+  display: none; /* Mobilde gizli */
+  background-color: #1f1f1f;
+  border-radius: 30px;
+  padding: 20px;
+  align-items: center;
+  gap: 14px;
+}
+
+.quoteText {
+  font-size: 14px;
+  line-height: 1.28;
+  color: #686868;
+}
+
+.quoteText span {
+  color: #fcfcfc;
+}
+
+/* Main Content Area: Recommended Books */
+.content {
+  background-color: #1f1f1f;
+  border-radius: 30px;
+  padding: 20px;
+}
+
+.contentHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.sectionTitle {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.paginationBtns {
+  display: flex;
+  gap: 8px;
+}
+
+.pageBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  color: #fcfcfc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.booksGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 21px 20px;
+}
+
+.bookCard {
+  display: flex;
+  flex-direction: column;
+}
+
+.bookCover {
+  width: 100%;
+  aspect-ratio: 137 / 208;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-bottom: 8px;
+}
+
+.bookName {
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bookAuthor {
+  font-size: 10px;
+  color: #686868;
+}
+
+/* Mobile Slide-out Menu Overlay */
+.mobileMenuOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 100;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mobileMenuContent {
+  width: 200px;
+  height: 100%;
+  background-color: #262626;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.closeBtn {
+  align-self: flex-end;
+  background: none;
+  border: none;
+  color: #fcfcfc;
+  cursor: pointer;
+}
+
+.mobileNav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.navLink {
+  color: #686868;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.activeNavLink {
+  color: #fcfcfc;
+  border-bottom: 2px solid #4f2ee8;
+  padding-bottom: 4px;
+}
+
+/* Tablet Responsive Breakpoint (768px+) */
+@media (min-width: 768px) {
+  .pageContainer {
+    padding: 32px;
+  }
+
+  .header {
+    padding: 16px 32px;
+  }
+
+  .burgerBtn {
+    display: none;
+  }
+
+  .desktopNav {
+    display: flex;
+    gap: 32px;
+  }
+
+  .userName {
+    display: inline;
+  }
+
+  .logoutBtn {
+    display: inline-block;
+  }
+
+  .sidebar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .workoutCard {
+    background-color: #1f1f1f;
+  }
+
+  .booksGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 27px 25px;
+  }
+
+  .sectionTitle {
+    font-size: 28px;
+  }
+}
+
+/* Desktop Responsive Breakpoint (1280px+) */
+@media (min-width: 1280px) {
+  .mainContentWrapper {
+    display: grid;
+    grid-template-columns: 353px 1fr;
+    gap: 16px;
+  }
+
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .workoutCard {
+    background-color: #262626;
+  }
+
+  .quoteCard {
+    display: flex;
+  }
+
+  .booksGrid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 27px 20px;
+  }
+}

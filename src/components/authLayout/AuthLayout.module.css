@@ -1,0 +1,203 @@
+/* Mobile First Base Styles (Mobile: < 768px) */
+.pageContainer {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #0c0c0c;
+  color: #fcfcfc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 14px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.authCard {
+  width: 100%;
+  max-width: 335px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.formSection {
+  background-color: #1f1f1f;
+  border-radius: 30px;
+  padding: 20px 20px 40px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+  color: #fcfcfc;
+}
+
+.titleDimmed {
+  color: rgba(228, 228, 228, 0.5);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.inputGroup {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: #262626;
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
+.inputLabel {
+  color: #686868;
+  font-size: 12px;
+  margin-right: 8px;
+  white-space: nowrap;
+}
+
+.input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fcfcfc;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.input::placeholder {
+  color: #fcfcfc;
+}
+
+.eyeButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  color: #fcfcfc;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.submitBtn {
+  background-color: #fcfcfc;
+  color: #1f1f1f;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 28px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.submitBtn:hover {
+  opacity: 0.9;
+}
+
+.switchLink {
+  color: #686868;
+  font-size: 12px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.previewSection {
+  background-color: #1f1f1f;
+  border-radius: 30px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  overflow: hidden;
+  height: 350px;
+}
+
+.mockupImg {
+  width: 100%;
+  max-width: 250px;
+  object-fit: cover;
+  object-position: top;
+}
+
+/* Tablet Responsive Breakpoint (768px+) */
+@media (min-width: 768px) {
+  .authCard {
+    max-width: 704px;
+  }
+
+  .formSection {
+    padding: 32px 64px 64px 64px;
+  }
+
+  .title {
+    font-size: 64px;
+    margin-bottom: 32px;
+  }
+
+  .form {
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+
+  .inputGroup {
+    padding: 16px 18px;
+  }
+
+  .inputLabel, .input {
+    font-size: 14px;
+  }
+
+  .previewSection {
+    display: none; /* Görsellerde tablet boyutunda telefon mokup'ı gizleniyor */
+  }
+}
+
+/* Desktop Responsive Breakpoint (1280px+) */
+@media (min-width: 1280px) {
+  .authCard {
+    max-width: 1216px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .formSection {
+    padding: 40px;
+  }
+
+  .previewSection {
+    display: flex;
+    height: auto;
+    align-items: center;
+  }
+
+  .mockupImg {
+    max-width: 340px;
+  }
+}
