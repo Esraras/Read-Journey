@@ -1,5 +1,4 @@
-
-import styles from './AuthLayout.module.css';
+import styles from "./AuthLayout.module.css";
 
 export const AuthLayout = ({ children }) => {
   return (
@@ -8,14 +7,15 @@ export const AuthLayout = ({ children }) => {
         {/* Sol / Üst Form Alanı */}
         <div className={styles.formSection}>
           <div className={styles.logo}>
-            <svg width="24" height="17" viewBox="0 0 24 17" fill="white">
-              <use href="../../image/icons.svg#icon-logo" />
+            <svg width="24" height="17">
+              <use href="../../../image/icons.svg#icon-logo"></use>
             </svg>
             <span>READ JOURNEY</span>
           </div>
 
           <h1 className={styles.title}>
-            Expand your mind, reading <span className={styles.titleDimmed}>a book</span>
+            Expand your mind, reading{" "}
+            <span className={styles.titleDimmed}>a book</span>
           </h1>
 
           {children}
@@ -23,10 +23,10 @@ export const AuthLayout = ({ children }) => {
 
         {/* Sağ / Alt Görsel Alanı */}
         <div className={styles.previewSection}>
-          <img 
-            src="/iphone-mockup.png" 
-            alt="App Preview" 
-            className={styles.mockupImg} 
+          <img
+            src="../../../image/iphone-mockup.png"
+            alt="App Preview"
+            className={styles.mockupImg}
           />
         </div>
       </div>

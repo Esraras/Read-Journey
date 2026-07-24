@@ -1,0 +1,241 @@
+/* Ana Düzen */
+.container {
+  display: flex;
+  gap: 16px;
+  max-width: 1216px;
+  margin: 0 auto;
+  color: #f4f4f4;
+  font-family: inherit;
+}
+
+/* Sol Panel */
+.sidebar {
+  width: 313px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Form Kartı */
+.formCard {
+  background-color: #1f1f22;
+  border-radius: 30px;
+  padding: 20px;
+}
+
+.cardTitle {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 14px;
+  color: #f4f4f4;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inputGroup {
+  display: flex;
+  align-items: center;
+  background-color: #26262b;
+  border-radius: 12px;
+  padding: 12px 14px;
+  border: 1px solid transparent;
+}
+
+.inputGroup:focus-within {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.inputGroup label {
+  font-size: 12px;
+  color: #686868;
+  white-space: nowrap;
+  margin-right: 8px;
+}
+
+.inputGroup input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #f4f4f4;
+  font-size: 12px;
+  width: 100%;
+}
+
+.addBtn {
+  margin-top: 12px;
+  background-color: transparent;
+  color: #f4f4f4;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: all 0.2s ease;
+}
+
+.addBtn:hover {
+  background-color: #f4f4f4;
+  color: #1f1f1f;
+}
+
+/* Önerilen Kitaplar */
+.recommendedCard {
+  background-color: #1f1f22;
+  border-radius: 30px;
+  padding: 20px;
+}
+
+.recommendedTitle {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.recommendedGrid {
+  display: flex;
+  gap: 10px;
+}
+
+.recBookCard {
+  width: 71px;
+  cursor: pointer;
+}
+
+.recBookCard img {
+  width: 71px;
+  height: 107px;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-bottom: 4px;
+}
+
+.recBookCard h4 {
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.recBookCard p {
+  font-size: 10px;
+  color: #686868;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.recFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 14px;
+  font-size: 12px;
+  color: #686868;
+  cursor: pointer;
+}
+
+.recFooter:hover {
+  color: #f4f4f4;
+}
+
+/* Sağ Panel - Kütüphane */
+.mainContent {
+  flex: 1;
+  background-color: #1f1f22;
+  border-radius: 30px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  min-height: 520px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header h2 {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.filterSelect {
+  background-color: #1f1f22;
+  color: #f4f4f4;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Boş Durum (Empty State) */
+.emptyState {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 274px;
+}
+
+.iconCircle {
+  width: 100px;
+  height: 100px;
+  background-color: #26262b;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.emptyState p {
+  font-size: 14px;
+  color: #686868;
+  line-height: 1.4;
+}
+
+.emptyState p span {
+  color: #f4f4f4;
+}
+
+/* Kitap Izgarası (Kitap eklendiğinde görünen) */
+.booksGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(137px, 1fr));
+  gap: 20px 24px;
+}
+
+.userBookCard {
+  cursor: pointer;
+}
+
+.userBookCard img {
+  width: 100%;
+  height: 208px;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-bottom: 8px;
+}
+
+.userBookCard h3 {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.userBookCard p {
+  font-size: 12px;
+  color: #686868;
+}

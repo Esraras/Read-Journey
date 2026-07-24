@@ -1,14 +1,24 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import authReducer from "./auth/slice.js";
+import booksReducer from "./books/slice.js";
 
 const storageEngine = storage?.default || storage;
 
 const persistConfig = {
-  key: "root",
+  key: "auth",
   storage: storageEngine,
-  whitelist: ["auth"],
+  whitelist: ["token", "refreshToken", "user"],
 };
 
 const persistedReducer = persistReducer(persistConfig, authReducer);
@@ -16,6 +26,7 @@ const persistedReducer = persistReducer(persistConfig, authReducer);
 const store = configureStore({
   reducer: {
     auth: persistedReducer,
+    books: booksReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

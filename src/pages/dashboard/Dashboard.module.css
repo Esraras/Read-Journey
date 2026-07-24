@@ -1,10 +1,16 @@
-    /* Base / Mobile First Styles (< 768px) */
+/* Base / Mobile First Styles (< 768px) */
 .pageContainer {
   min-height: 100vh;
   background-color: #0c0c0c;
   color: #fcfcfc;
   padding: 20px 20px 40px 20px;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
 }
 
 .dashboardLayout {
@@ -88,12 +94,9 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-}
-
-.filterCard {
-  background-color: #1f1f1f;
   border-radius: 30px;
+
+  background-color: #1f1f1f;
   padding: 20px;
 }
 
@@ -148,15 +151,18 @@
 
 /* Workout Guide Card */
 .workoutCard {
+  margin-top: 20px;
   background-color: #262626;
-  border-radius: 30px;
+  border-radius: 10px;
   padding: 20px;
 }
 
 .workoutTitle {
+  color: white;
+  justify-self: flex-start;
   font-size: 18px;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 .stepsList {
@@ -186,12 +192,13 @@
 }
 
 .stepText {
+  text-align: justify;
   font-size: 12px;
   line-height: 1.33;
   color: #686868;
 }
 
-.stepText highlight {
+.stepText strong {
   color: #fcfcfc;
   font-weight: 600;
 }
@@ -212,6 +219,7 @@
   background-color: #1f1f1f;
   border-radius: 30px;
   padding: 20px;
+  margin-top: 40px;
   align-items: center;
   gap: 14px;
 }
@@ -228,6 +236,7 @@
 
 /* Main Content Area: Recommended Books */
 .content {
+  margin-top: 10px;
   background-color: #1f1f1f;
   border-radius: 30px;
   padding: 20px;
@@ -241,6 +250,7 @@
 }
 
 .sectionTitle {
+  color: white;
   font-size: 20px;
   font-weight: 700;
 }
@@ -271,6 +281,7 @@
 
 .bookCard {
   display: flex;
+  width: 137px;
   flex-direction: column;
 }
 
@@ -345,6 +356,9 @@
 
 /* Tablet Responsive Breakpoint (768px+) */
 @media (min-width: 768px) {
+  .content {
+    margin-top: 20px;
+  }
   .pageContainer {
     padding: 32px;
   }
@@ -396,7 +410,9 @@
     grid-template-columns: 353px 1fr;
     gap: 16px;
   }
-
+  .content{
+    margin-top: 0;
+  }
   .sidebar {
     display: flex;
     flex-direction: column;
