@@ -21,74 +21,7 @@
   margin: 0 auto;
 }
 
-/* Header Component */
-.header {
-  background-color: #1f1f1f;
-  border-radius: 15px;
-  padding: 11px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 700;
-  font-size: 14px;
-  letter-spacing: -0.02em;
-}
-
-.desktopNav {
-  display: none;
-}
-
-.userBlock {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.avatar {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  background-color: #262626;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 14px;
-}
-
-.userName {
-  display: none;
-  font-weight: 700;
-  font-size: 16px;
-}
-
-.logoutBtn {
-  display: none;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #fcfcfc;
-  border-radius: 30px;
-  padding: 10px 20px;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.burgerBtn {
-  background: none;
-  border: none;
-  color: #fcfcfc;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-}
 
 /* Sidebar / Dashboard Controls */
 .sidebar {
@@ -304,54 +237,6 @@
 .bookAuthor {
   font-size: 10px;
   color: #686868;
-}
-
-/* Mobile Slide-out Menu Overlay */
-.mobileMenuOverlay {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: 100;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.mobileMenuContent {
-  width: 200px;
-  height: 100%;
-  background-color: #262626;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.closeBtn {
-  align-self: flex-end;
-  background: none;
-  border: none;
-  color: #fcfcfc;
-  cursor: pointer;
-}
-
-.mobileNav {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-
-.navLink {
-  color: #686868;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.activeNavLink {
-  color: #fcfcfc;
-  border-bottom: 2px solid #4f2ee8;
-  padding-bottom: 4px;
 }
 
 /* Tablet Responsive Breakpoint (768px+) */

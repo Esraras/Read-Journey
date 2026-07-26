@@ -9,7 +9,7 @@ import { Dashboard } from "./pages/dashboard/Dashboard";
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { refreshUser } from './redux/auth/operations';
-
+import Library from "./components/library/Library";
 function App() {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
@@ -23,6 +23,7 @@ function App() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
+        <Route path="/library" element={<Library />} />
         <Route
           path="/"
           element={

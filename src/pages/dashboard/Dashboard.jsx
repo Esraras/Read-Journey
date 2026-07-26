@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
-import { logOut } from "../../redux/auth/operations";
+import { useNavigate } from "react-router-dom";
 import { fetchRecommendedBooks } from "../../redux/books/operations";
 import BookModal from "../../components/bookModal/BookModal";
 import {
@@ -11,26 +10,22 @@ import {
   selectCurrentPage,
 } from "../../redux/books/selectors";
 import styles from "./Dashboard.module.css";
+import { Navigation } from "../../components/navigation/Navigation";
 
 export const Dashboard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // State & Selectors
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [titleFilter, setTitleFilter] = useState("");
   const [authorFilter, setAuthorFilter] = useState("");
   const [page, setPage] = useState(1);
   const [selectedBook, setSelectedBook] = useState(null);
 
-  // Redux Selectors
-  const user = useSelector((state) => state.auth.user) || { name: "" };
   const books = useSelector(selectRecommendedBooks);
   const isLoading = useSelector(selectBooksIsLoading);
   const totalPages = useSelector(selectTotalPages);
   const currentPage = useSelector(selectCurrentPage);
 
-  // Sayfa yüklendiğinde veya sayfa/filtre değiştiğinde API'den önerilen kitapları çek
   useEffect(() => {
     dispatch(
       fetchRecommendedBooks({
@@ -42,10 +37,9 @@ export const Dashboard = () => {
     );
   }, [dispatch, page]);
 
-  // Filtre Formu Gönderildiğinde
   const handleFilterSubmit = (e) => {
     e.preventDefault();
-    setPage(1); // Filtre uygulandığında 1. sayfaya dön
+    setPage(1);
     dispatch(
       fetchRecommendedBooks({
         page: 1,
@@ -56,18 +50,12 @@ export const Dashboard = () => {
     );
   };
 
-  // Sayfalandırma Kontrolleri
   const handlePrevPage = () => {
     if (page > 1) setPage((prev) => prev - 1);
   };
 
   const handleNextPage = () => {
     if (page < totalPages) setPage((prev) => prev + 1);
-  };
-
-  const handleLogout = () => {
-    dispatch(logOut());
-    navigate("/login");
   };
 
   const handleOpenModal = (book) => {
@@ -79,78 +67,14 @@ export const Dashboard = () => {
   };
 
   const handleAddToLibrary = (bookId) => {
-    // Redux dispatch / API çağrınız (örn: dispatch(addBookToLibrary(bookId)))
     console.log("Kütüphaneye eklenen kitap ID:", bookId);
   };
-
-  const getInitial = (name) => (name ? name.charAt(0).toUpperCase() : "U");
 
   return (
     <div className={styles.pageContainer}>
       <div className={styles.dashboardLayout}>
-        {/* TOP HEADER */}
-        <header className={styles.header}>
-          <div className={styles.logo}>
-            <svg width="24" height="17">
-              <use href="../../../image/icons.svg#icon-logo"></use>
-            </svg>
-            <span>READ JOURNEY</span>
-          </div>
-
-          {/* Desktop Navigation */}
-          <nav className={styles.desktopNav}>
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                isActive
-                  ? `${styles.navLink} ${styles.activeNavLink}`
-                  : styles.navLink
-              }
-            >
-              Home
-            </NavLink>
-            <NavLink
-              to="/library"
-              className={({ isActive }) =>
-                isActive
-                  ? `${styles.navLink} ${styles.activeNavLink}`
-                  : styles.navLink
-              }
-            >
-              My library
-            </NavLink>
-          </nav>
-
-          {/* User & Logout Section */}
-          <div className={styles.userBlock}>
-            <div className={styles.avatar}>{getInitial(user.name)}</div>
-            <span className={styles.userName}>{user.name}</span>
-            <button className={styles.logoutBtn} onClick={handleLogout}>
-              Log out
-            </button>
-            <button
-              className={styles.burgerBtn}
-              onClick={() => setIsMenuOpen(true)}
-            >
-              <svg
-                width="28"
-                height="28"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <line x1="3" y1="12" x2="21" y2="12"></line>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <line x1="3" y1="18" x2="21" y2="18"></line>
-              </svg>
-            </button>
-          </div>
-        </header>
-
-        {/* MAIN LAYOUT */}
+        <Navigation />
         <div className={styles.mainContentWrapper}>
-          {/* LEFT SIDEBAR CONTROLS */}
           <aside className={styles.sidebar}>
             {/* Filter Form Card */}
             <div className={styles.filterCard}>
@@ -230,7 +154,6 @@ export const Dashboard = () => {
             </div>
           </aside>
 
-          {/* RIGHT RECOMMENDED BOOKS LIST */}
           <main className={styles.content}>
             <div className={styles.contentHeader}>
               <h2 className={styles.sectionTitle}>Recommended</h2>
@@ -252,7 +175,6 @@ export const Dashboard = () => {
               </div>
             </div>
 
-            {/* Loading / Books Grid */}
             {isLoading ? (
               <p
                 style={{
@@ -303,65 +225,6 @@ export const Dashboard = () => {
           </main>
         </div>
       </div>
-
-      {/* MOBILE SLIDE-OUT MENU */}
-      {isMenuOpen && (
-        <div
-          className={styles.mobileMenuOverlay}
-          onClick={() => setIsMenuOpen(false)}
-        >
-          <div
-            className={styles.mobileMenuContent}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              className={styles.closeBtn}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-              </svg>
-            </button>
-            <nav className={styles.mobileNav}>
-              <NavLink
-                to="/"
-                className={({ isActive }) =>
-                  isActive
-                    ? `${styles.navLink} ${styles.activeNavLink}`
-                    : styles.navLink
-                }
-              >
-                Home
-              </NavLink>
-              <NavLink
-                to="/library"
-                className={({ isActive }) =>
-                  isActive
-                    ? `${styles.navLink} ${styles.activeNavLink}`
-                    : styles.navLink
-                }
-              >
-                My library
-              </NavLink>
-            </nav>
-            <button
-              className={styles.logoutBtn}
-              style={{ display: "block", width: "100%" }}
-              onClick={handleLogout}
-            >
-              Log out
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
