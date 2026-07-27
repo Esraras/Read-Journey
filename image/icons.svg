@@ -4,5 +4,13 @@
 <path fill="#f9f9f9" style="fill: var(--color1, #f9f9f9)" d="M0 20.706v-20.706h24.264c3.299 0 6.512 1.051 9.173 3.001 1.591 1.166 2.861 2.715 3.693 4.503l2.807 6.034c1.084-2.647 2.443-5.173 4.055-7.536l0.139-0.204c0.463-0.679 0.992-1.31 1.58-1.884l1.196-1.168c0.779-0.762 1.704-1.358 2.719-1.755l0.103-0.040c1.608-0.629 3.32-0.951 5.047-0.951h24.283v20.706h-79.059z"></path>
 <path fill="#f9f9f9" style="fill: var(--color1, #f9f9f9)" d="M0 24.471h79.059v7.529h-79.059v-7.529z"></path>
 </symbol>
+<symbol id="icon-block" viewBox="0 0 32 32">
+<path fill="#e85050" style="fill: var(--color1, #e85050)" opacity="0.1" d="M32 16c0 8.837-7.163 16-16 16s-16-7.163-16-16c0-8.837 7.163-16 16-16s16 7.163 16 16z"></path>
+<path fill="none" stroke="#e85050" style="stroke: var(--color1, #e85050)" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="1.1429" d="M31.429 16c0 8.521-6.908 15.429-15.429 15.429s-15.429-6.908-15.429-15.429c0-8.521 6.908-15.429 15.429-15.429s15.429 6.908 15.429 15.429z"></path>
+<path fill="none" stroke="#e85050" style="stroke: var(--color1, #e85050)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="1.1429" d="M10 12h12"></path>
+<path fill="none" stroke="#e85050" style="stroke: var(--color1, #e85050)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="1.1429" d="M20.667 12v9.333c0 0.354-0.14 0.693-0.39 0.943s-0.589 0.39-0.943 0.39h-6.667c-0.354 0-0.693-0.14-0.943-0.39s-0.39-0.589-0.39-0.943v-9.333M13.333 12v-1.333c0-0.354 0.14-0.693 0.39-0.943s0.589-0.39 0.943-0.39h2.667c0.354 0 0.693 0.14 0.943 0.39s0.39 0.589 0.39 0.943v1.333"></path>
+<path fill="none" stroke="#e85050" style="stroke: var(--color1, #e85050)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="1.1429" d="M14.667 15.333v4"></path>
+<path fill="none" stroke="#e85050" style="stroke: var(--color1, #e85050)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="1.1429" d="M17.333 15.333v4"></path>
+</symbol>
 </defs>
 </svg>

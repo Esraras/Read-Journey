@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import styles from "./BookModal.module.css";
 import { useDispatch } from "react-redux";
-import { addBook } from "../../redux/books/operations";
+import { addBookFromRecommended } from "../../redux/books/operations";
 
 export default function BookModal({ book, onClose }) {
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ export default function BookModal({ book, onClose }) {
       totalPages: Number(book.totalPages || book.pages),
     };
 
-    dispatch(addBook(bookData));
+    dispatch(addBookFromRecommended(bookData));
     onClose();
   };
 

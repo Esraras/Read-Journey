@@ -4,13 +4,14 @@ import { Navigation } from "../navigation/Navigation";
 import styleContainer from "../../pages/dashboard/Dashboard.module.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-
+import ReadingModal from "../readingModal/ReadingModal";
 import { BookAddedModal } from "../bookAddedModal/BookAddedModal";
 
 import {
   addBook,
   fetchRecommendedBooks,
   fetchOwnBooks,
+  deleteBook,
 } from "../../redux/books/operations";
 import {
   selectRecommendedBooks,
@@ -36,7 +37,6 @@ export const Library = () => {
     dispatch(fetchOwnBooks());
   }, [dispatch]);
 
-  // Manuel Form Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!title || !author || !pages) return;
@@ -47,7 +47,7 @@ export const Library = () => {
           title,
           author,
           totalPages: Number(pages),
-        })
+        }),
       ).unwrap();
 
       // Form alanlarını sıfırla ve Başarı modalını aç
@@ -66,6 +66,15 @@ export const Library = () => {
     if (filter === "done") return book.status === "done";
     return true;
   });
+
+  const handleStartReading = (bookId) => {
+    console.log("Reading started for book ID:", bookId);
+    setSelectedBook(null);
+  };
+
+  const handleDeleteBook = (bookId) => {
+    dispatch(deleteBook(bookId));
+  };
 
   return (
     <div className={styleContainer.pageContainer}>
@@ -132,10 +141,7 @@ export const Library = () => {
                     </div>
                   ))}
                 </div>
-                <div
-                  className={styles.recFooter}
-                  onClick={() => navigate("/")}
-                >
+                <div className={styles.recFooter} onClick={() => navigate("/")}>
                   <span>Home</span>
                   <span className={styles.arrowIcon}>→</span>
                 </div>
@@ -164,6 +170,7 @@ export const Library = () => {
                     <div
                       key={book._id || book.id}
                       className={styles.userBookCard}
+                      onClick={() => setSelectedBook(book)}
                     >
                       <img
                         src={
@@ -175,10 +182,30 @@ export const Library = () => {
                         alt={book.title}
                         className={styles.bookCover}
                       />
-                      <h4 className={styles.bookName}>{book.title}</h4>
-                      <p className={styles.bookAuthor}>{book.author}</p>
+                      <div className={styles.info}>
+                         <div className={styles.bookInfo}>
+                        <h4 className={styles.bookName}>{book.title}</h4>
+                        <p className={styles.bookAuthor}>{book.author}</p>
+                      </div>
+                      <button
+                        onclick={() => handleDeleteBook(selectedBook._id)}
+                        className={styles.closeModalBtn}
+                      >
+                        <svg>
+                          <use href="../../../image/icons.svg#icon-block"></use>
+                        </svg>
+                      </button>
+                      </div>
+                     
                     </div>
                   ))}
+                  {selectedBook && (
+                    <ReadingModal
+                      book={selectedBook}
+                      onClose={() => setSelectedBook(null)}
+                      onStartReading={handleStartReading}
+                    />
+                  )}
                 </div>
               ) : (
                 <div className={styles.emptyState}>

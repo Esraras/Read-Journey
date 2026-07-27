@@ -221,7 +221,6 @@
 
 .userBookCard {
   cursor: pointer;
-
   display: flex;
   width: 137px;
   flex-direction: column;
@@ -245,6 +244,26 @@
 .userBookCard p {
   font-size: 12px;
   color: #686868;
+}
+.info{
+  display: flex;
+  flex-direction: row;
+}
+.bookInfo{
+  display: flex;
+  flex-direction: column;
+}
+.closeModalBtn {
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 24px;
+  height: 24px;
+}
+
+.closeModalBtn svg{
+  width: 24px;
+  height: 24px;
 }
 
 @media (max-width: 768px) {
