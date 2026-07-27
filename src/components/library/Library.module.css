@@ -6,6 +6,7 @@
   margin: 0 auto;
   color: #f4f4f4;
   font-family: inherit;
+   flex-direction: row;
 }
 
 /* Sol Panel */
@@ -13,13 +14,12 @@
   width: 313px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
 }
 
 /* Form Kartı */
 .formCard {
   background-color: #1f1f22;
-  border-radius: 30px;
+  border-radius: 30px 30px 0 0;
   padding: 20px;
 }
 
@@ -87,7 +87,7 @@
 /* Önerilen Kitaplar */
 .recommendedCard {
   background-color: #1f1f22;
-  border-radius: 30px;
+  border-radius: 0 0 30px 30px;
   padding: 20px;
 }
 
@@ -164,6 +164,7 @@
 }
 
 .header h2 {
+  color: white;
   font-size: 28px;
   font-weight: 700;
 }
@@ -220,10 +221,16 @@
 
 .userBookCard {
   cursor: pointer;
+
+  display: flex;
+  width: 137px;
+  flex-direction: column;
+  
 }
 
-.userBookCard img {
+.bookCover {
   width: 100%;
+  aspect-ratio: 137 / 208;
   height: 208px;
   border-radius: 8px;
   object-fit: cover;
@@ -238,4 +245,19 @@
 .userBookCard p {
   font-size: 12px;
   color: #686868;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    padding: 0 16px;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+
+  .mainContent {
+    padding: 20px;
+  }
 }

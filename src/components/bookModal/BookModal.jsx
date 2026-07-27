@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import styles from "./BookModal.module.css";
+import { useDispatch } from "react-redux";
+import { addBook } from "../../redux/books/operations";
 
-export default function BookModal({ book, onClose, onAddToLibrary }) {
-    
+export default function BookModal({ book, onClose }) {
+  const dispatch = useDispatch();
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.code === "Escape") {
@@ -22,21 +24,34 @@ export default function BookModal({ book, onClose, onAddToLibrary }) {
 
   if (!book) return null;
 
-  const handleBackdropClick = (e) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
+  const handleAddClick = () => {
+    const bookData = {
+      title: book.title,
+      author: book.author,
+      totalPages: Number(book.totalPages || book.pages),
+    };
+
+    dispatch(addBook(bookData));
+    onClose();
   };
 
   return (
-    <div className={styles.backdrop} onClick={handleBackdropClick}>
+    <div className={styles.backdrop} onClick={handleAddClick}>
       <div className={styles.modal}>
-        <button className={styles.closeBtn} onClick={onClose} aria-label="Close">
+        <button
+          className={styles.closeBtn}
+          onClick={onClose}
+          aria-label="Close"
+        >
           ✕
         </button>
 
         <div className={styles.imageWrapper}>
-          <img src={book.imageUrl || book.cover} alt={book.title} className={styles.bookCover} />
+          <img
+            src={book.imageUrl || book.cover}
+            alt={book.title}
+            className={styles.bookCover}
+          />
         </div>
 
         <div className={styles.info}>
@@ -48,7 +63,7 @@ export default function BookModal({ book, onClose, onAddToLibrary }) {
         <button
           className={styles.addBtn}
           onClick={() => {
-            onAddToLibrary(book._id || book.id);
+            handleAddClick(book._id || book.id);
             onClose();
           }}
         >
