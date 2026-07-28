@@ -16,6 +16,8 @@ const ReadingModal = ({ book, onClose, onStartReading }) => {
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [onClose]);
+  
+
 
   return (
     <div className="modal-overlay" onClick={onClose}>

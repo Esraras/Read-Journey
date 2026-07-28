@@ -87,7 +87,7 @@ export const deleteBook = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       const res = await axios.delete(`/books/remove/${id}`);
-      return res.data; // Silinen kitabın ID'sini dönebilir
+      return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || error.message

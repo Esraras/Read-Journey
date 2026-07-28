@@ -12,6 +12,7 @@ import {
   fetchRecommendedBooks,
   fetchOwnBooks,
   deleteBook,
+  startReading
 } from "../../redux/books/operations";
 import {
   selectRecommendedBooks,
@@ -50,7 +51,6 @@ export const Library = () => {
         }),
       ).unwrap();
 
-      // Form alanlarını sıfırla ve Başarı modalını aç
       setTitle("");
       setAuthor("");
       setPages("");
@@ -67,10 +67,15 @@ export const Library = () => {
     return true;
   });
 
-  const handleStartReading = (bookId) => {
-    console.log("Reading started for book ID:", bookId);
+ const handleStartReading = async ({ bookId, page = 1 }) => {
+  try {
+    await dispatch(startReading({ id: bookId, page })).unwrap();
     setSelectedBook(null);
-  };
+    navigate(`/reading/${bookId}`);
+  } catch (error) {
+    console.error("Start reading error:", error);
+  }
+};
 
   const handleDeleteBook = (bookId) => {
     dispatch(deleteBook(bookId));
@@ -183,20 +188,19 @@ export const Library = () => {
                         className={styles.bookCover}
                       />
                       <div className={styles.info}>
-                         <div className={styles.bookInfo}>
-                        <h4 className={styles.bookName}>{book.title}</h4>
-                        <p className={styles.bookAuthor}>{book.author}</p>
+                        <div className={styles.bookInfo}>
+                          <h4 className={styles.bookName}>{book.title}</h4>
+                          <p className={styles.bookAuthor}>{book.author}</p>
+                        </div>
+                        <button
+                          onClick={() => handleDeleteBook(book._id)}
+                          className={styles.closeModalBtn}
+                        >
+                          <svg>
+                            <use href="../../../image/icons.svg#icon-block"></use>
+                          </svg>
+                        </button>
                       </div>
-                      <button
-                        onclick={() => handleDeleteBook(selectedBook._id)}
-                        className={styles.closeModalBtn}
-                      >
-                        <svg>
-                          <use href="../../../image/icons.svg#icon-block"></use>
-                        </svg>
-                      </button>
-                      </div>
-                     
                     </div>
                   ))}
                   {selectedBook && (
