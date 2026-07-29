@@ -6,13 +6,14 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import ReadingModal from "../readingModal/ReadingModal";
 import { BookAddedModal } from "../bookAddedModal/BookAddedModal";
+import { toast } from "react-toastify";
 
 import {
   addBook,
   fetchRecommendedBooks,
   fetchOwnBooks,
   deleteBook,
-  startReading
+  startReading,
 } from "../../redux/books/operations";
 import {
   selectRecommendedBooks,
@@ -54,6 +55,7 @@ export const Library = () => {
       setTitle("");
       setAuthor("");
       setPages("");
+      navigate("/library");
       setIsSuccessModalOpen(true);
     } catch (error) {
       console.error("Kitap eklenirken hata oluştu:", error);
@@ -67,17 +69,36 @@ export const Library = () => {
     return true;
   });
 
- const handleStartReading = async ({ bookId, page = 1 }) => {
-  try {
-    await dispatch(startReading({ id: bookId, page })).unwrap();
-    setSelectedBook(null);
-    navigate(`/reading/${bookId}`);
-  } catch (error) {
-    console.error("Start reading error:", error);
-  }
-};
+  const handleStartReading = async ({ bookId, page = 1 }) => {
+    if (
+      selectedBook?.status === "in-progress" ||
+      selectedBook?.status === "active"
+    ) {
+      toast.error("You have already started reading this book", {
+        position: "top-right",
+      });
+      setSelectedBook(null);
+      navigate(`/reading/${bookId}`); 
+      return;
+    }
 
-  const handleDeleteBook = (bookId) => {
+    try {
+      await dispatch(startReading({ id: bookId, page })).unwrap();
+      setSelectedBook(null);
+      navigate(`/reading/${bookId}`);
+    } catch (error) {
+      console.error("Start reading error:", error);
+
+      toast.error("You have already started reading this book", {
+        position: "top-right",
+      });
+      
+      setSelectedBook(null);
+      navigate(`/reading/${bookId}`);
+    }
+  };
+  const handleDeleteBook = (e, bookId) => {
+    e.stopPropagation();
     dispatch(deleteBook(bookId));
   };
 
@@ -193,7 +214,9 @@ export const Library = () => {
                           <p className={styles.bookAuthor}>{book.author}</p>
                         </div>
                         <button
-                          onClick={() => handleDeleteBook(book._id)}
+                          onClick={(e) =>
+                            handleDeleteBook(e, book._id || book.id)
+                          }
                           className={styles.closeModalBtn}
                         >
                           <svg>
@@ -221,14 +244,13 @@ export const Library = () => {
                 </div>
               )}
             </main>
+            <BookAddedModal
+              isOpen={isSuccessModalOpen}
+              onClose={() => setIsSuccessModalOpen(false)}
+            />
           </div>
         </div>
       </div>
-
-      <BookAddedModal
-        isOpen={isSuccessModalOpen}
-        onClose={() => setIsSuccessModalOpen(false)}
-      />
     </div>
   );
 };

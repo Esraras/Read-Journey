@@ -1,5 +1,5 @@
-import React from "react";
-import styles from "./Reading.module.css";
+
+import styles from "../../pages/reading/Reading.module.css";
 
 export const MyBook = ({ book, isReading }) => {
   return (

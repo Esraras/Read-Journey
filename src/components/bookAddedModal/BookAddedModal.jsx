@@ -1,8 +1,7 @@
 import { useEffect } from 'react';
-import styles from './BookAddedModal.module.css'; // İsteğe bağlı CSS Module
+import styles from './BookAddedModal.module.css';
 
 export const BookAddedModal = ({ isOpen, onClose }) => {
-  // ESC tuşu ile kapatma kontrolü
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') onClose();

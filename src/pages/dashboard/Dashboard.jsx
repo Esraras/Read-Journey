@@ -6,8 +6,7 @@ import BookModal from "../../components/bookModal/BookModal";
 import {
   selectRecommendedBooks,
   selectBooksIsLoading,
-  selectTotalPages,
-  selectCurrentPage,
+  selectTotalPages
 } from "../../redux/books/selectors";
 import styles from "./Dashboard.module.css";
 import { Navigation } from "../../components/navigation/Navigation";
@@ -24,7 +23,7 @@ export const Dashboard = () => {
   const books = useSelector(selectRecommendedBooks);
   const isLoading = useSelector(selectBooksIsLoading);
   const totalPages = useSelector(selectTotalPages);
-  const currentPage = useSelector(selectCurrentPage);
+  //const currentPage = useSelector(selectCurrentPage);
 
   useEffect(() => {
     dispatch(
@@ -64,10 +63,6 @@ export const Dashboard = () => {
 
   const handleCloseModal = () => {
     setSelectedBook(null);
-  };
-
-  const handleAddToLibrary = (bookId) => {
-    console.log("Kütüphaneye eklenen kitap ID:", bookId);
   };
 
   return (
@@ -219,7 +214,6 @@ export const Dashboard = () => {
               <BookModal
                 book={selectedBook}
                 onClose={handleCloseModal}
-                onAddToLibrary={handleAddToLibrary}
               />
             )}
           </main>

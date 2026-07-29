@@ -2,9 +2,12 @@ import { useEffect } from "react";
 import styles from "./BookModal.module.css";
 import { useDispatch } from "react-redux";
 import { addBookFromRecommended } from "../../redux/books/operations";
+import { useNavigate } from "react-router-dom";
 
 export default function BookModal({ book, onClose }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.code === "Escape") {
@@ -24,20 +27,16 @@ export default function BookModal({ book, onClose }) {
 
   if (!book) return null;
 
-  const handleAddClick = () => {
-    const bookData = {
-      title: book.title,
-      author: book.author,
-      totalPages: Number(book.totalPages || book.pages),
-    };
-
-    dispatch(addBookFromRecommended(bookData));
+  const handleAddClick = (e) => {
+    if (e) e.stopPropagation();
+    dispatch(addBookFromRecommended(book._id || book.id));
+    navigate("/library");
     onClose();
   };
 
   return (
     <div className={styles.backdrop} onClick={handleAddClick}>
-      <div className={styles.modal}>
+      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <button
           className={styles.closeBtn}
           onClick={onClose}
@@ -60,13 +59,7 @@ export default function BookModal({ book, onClose }) {
           <p className={styles.pages}>{book.totalPages || book.pages} pages</p>
         </div>
 
-        <button
-          className={styles.addBtn}
-          onClick={() => {
-            handleAddClick(book._id || book.id);
-            onClose();
-          }}
-        >
+        <button className={styles.addBtn} onClick={handleAddClick}>
           Add to library
         </button>
       </div>

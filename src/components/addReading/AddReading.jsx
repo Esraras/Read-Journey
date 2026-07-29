@@ -1,5 +1,4 @@
-import React from "react";
-import styles from "./Reading.module.css";
+import styles from "../../pages/reading/Reading.module.css";
 
 export const AddReading = ({ page, setPage, isReading, onSubmit }) => {
   return (

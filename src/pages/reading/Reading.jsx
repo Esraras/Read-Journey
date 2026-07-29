@@ -6,8 +6,8 @@ import toast from "react-hot-toast";
 import { Navigation } from "../../components/navigation/Navigation";
 import { AddReading } from "../../components/addReading/AddReading";
 import { Details } from "../../components/details/Details";
-import { MyBook } from "./MyBook";
-import { BookIsReadModal } from "../bookIsReadModal/BookIsReadModal";
+import { MyBook } from "../../components/myBook/MyBook";
+import { BookIsReadModal } from "../../components/bookIsReadModal/BookIsReadModal";
 
 import { startReading, finishReading, deleteReading, fetchOwnBooks } from "../../redux/books/operations";
 import { selectOwnBooks } from "../../redux/books/selectors";
