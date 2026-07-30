@@ -58,10 +58,8 @@ export const Details = ({ book, activeTab, setActiveTab, onDeleteSession }) => {
           )}
         </div>
       ) : (
-        /* Statistics Sekmesi */
         <div className={styles.statsContent}>
           <div className={styles.circleProgress}>
-            {/* Dairesel veya çubuk grafik istatistiği */}
             <div className={styles.percentText}>
               {(((book.progress?.reduce((acc, curr) => acc + ((curr.finishPage || 0) - curr.startPage), 0) || 0) / book.totalPages) * 100).toFixed(0)}%
             </div>

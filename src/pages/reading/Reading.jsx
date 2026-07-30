@@ -109,7 +109,6 @@ export const Reading = () => {
               />
             </aside>
 
-            {/* Sağ Panel: My Reading (Kitap Kartı ve Status) */}
             <main className={styles.mainContent}>
               <h2 className={styles.pageTitle}>My reading</h2>
               <MyBook book={book} isReading={isReading} />
@@ -118,7 +117,6 @@ export const Reading = () => {
         </div>
       </div>
 
-      {/* Kitap Tamamlandı Pop-up Modal */}
       <BookIsReadModal
         isOpen={isReadModalOpen}
         onClose={() => setIsReadModalOpen(false)}
