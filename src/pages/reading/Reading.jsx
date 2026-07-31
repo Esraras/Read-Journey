@@ -45,10 +45,17 @@ export const Reading = () => {
     book.status === "in-progress" &&
     book.progress?.some((p) => p.status === "active");
 
+    const isCompleted = book.status === "done";
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const pageNum = Number(page);
 
+    if (isCompleted) {
+      toast.error("This book is already finished!");
+      return;
+    }
+    
     if (!pageNum || pageNum <= 0) {
       toast.error("Please enter a valid page number.");
       return;
@@ -89,10 +96,10 @@ export const Reading = () => {
     }
   };
 
-  const handleDeleteSession = async (sessionId) => {
+  const handleDeleteSession = async (readingId) => {
     try {
       await dispatch(
-        deleteReading({ bookId: book._id || book.id, sessionId }),
+        deleteReading({ bookId: book._id || book.id, readingId }),
       ).unwrap();
       toast.success("Session deleted.");
     } catch (err) {

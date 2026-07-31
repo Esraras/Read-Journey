@@ -1,6 +1,7 @@
 import styles from "../../pages/reading/Reading.module.css";
 
 export const Details = ({ book, activeTab, setActiveTab, onDeleteSession }) => {
+
   const progress = book.progress || [];
 
   const hasStarted = progress.length > 0;
@@ -22,6 +23,18 @@ export const Details = ({ book, activeTab, setActiveTab, onDeleteSession }) => {
       </div>
     );
   }
+  
+  const groupedProgress = progress.reduce((acc, session) => {
+    const dateStr = new Date(session.startReading).toLocaleDateString("tr-TR", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+    if (!acc[dateStr]) acc[dateStr] = [];
+    acc[dateStr].push(session);
+    return acc;
+  }, {});
+
   return (
     <div className={styles.detailsCard}>
       <div className={styles.detailsHeader}>
@@ -43,39 +56,76 @@ export const Details = ({ book, activeTab, setActiveTab, onDeleteSession }) => {
           </button>
         </div>
       </div>
-      {activeTab === "diary" ? (
+      
+     {activeTab === "diary" ? (
         <div className={styles.diaryContent}>
-          {progress.length === 0 ? (
-            <p className={styles.infoText}>
-              Progress will appear here once you start reading.
-            </p>
-          ) : (
-            progress.map((session) => {
-              const pagesRead = session.finishPage
-                ? session.finishPage - session.startPage
-                : 0;
-              const percent = ((pagesRead / book.totalPages) * 100).toFixed(1);
+          {Object.entries(groupedProgress).map(([date, sessions]) => {
 
-              return (
-                <div key={session._id} className={styles.diaryItem}>
-                  <div className={styles.diaryDate}>
-                    {new Date(session.startReading).toLocaleDateString()}
+            const totalGroupPages = sessions.reduce((acc, s) => {
+              const pages = s.finishPage ? s.finishPage - s.startPage : 0;
+              return acc + pages;
+            }, 0);
+
+            return (
+              <div key={date} className={styles.diaryGroup}>
+                <div className={styles.groupHeader}>
+                  <div className={styles.groupHeaderLeft}>
+                    <span className={styles.squareIcon}>⏹</span>
+                    <span className={styles.groupDate}>{date}</span>
                   </div>
-                  <div className={styles.diaryStats}>
-                    <span>{percent}%</span>
-                    <span>{pagesRead} pages</span>
-                    <span>{session.speed || 0} p/h</span>
-                    <button
-                      onClick={() => onDeleteSession(session._id)}
-                      className={styles.deleteBtn}
-                    >
-                      🗑️
-                    </button>
+                  <span className={styles.groupTotalPages}>{totalGroupPages} pages</span>
+                </div>
+
+                <div className={styles.groupTimeline}>
+                  <div className={styles.timelineLine}></div>
+                  <div className={styles.sessionsList}>
+                    {sessions.map((session) => {
+                      const pagesRead = session.finishPage
+                        ? session.finishPage - session.startPage
+                        : 0;
+                      const percent = ((pagesRead / book.totalPages) * 100).toFixed(2);
+
+                      const durationMinutes =
+                        session.startReading && session.finishReading
+                          ? Math.round(
+                              (new Date(session.finishReading) -
+                                new Date(session.startReading)) /
+                                60000
+                            )
+                          : session.minutesSpent || 0;
+
+                      return (
+                        <div key={session._id} className={styles.diaryItem}>
+                          <div className={styles.sessionLeft}>
+                            <div className={styles.sessionPercent}>{percent}%</div>
+                            <div className={styles.sessionTime}>
+                              {durationMinutes} minutes
+                            </div>
+                          </div>
+
+                          <div className={styles.sessionRight}>
+                            <div className={styles.graphContainer}>
+                              <div className={styles.greenBar}></div>
+                              <button
+                                onClick={() => onDeleteSession(session._id || session.id)}
+                                className={styles.deleteBtn}
+                                title="Delete"
+                              >
+                                🗑️
+                              </button>
+                            </div>
+                            <div className={styles.sessionSpeed}>
+                              {session.speed || 0} pages per hour
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
-              );
-            })
-          )}
+              </div>
+            );
+          })}
         </div>
       ) : (
         <div className={styles.statsContent}>
