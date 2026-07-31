@@ -9,7 +9,12 @@ import { Details } from "../../components/details/Details";
 import { MyBook } from "../../components/myBook/MyBook";
 import { BookIsReadModal } from "../../components/bookIsReadModal/BookIsReadModal";
 
-import { startReading, finishReading, deleteReading, fetchOwnBooks } from "../../redux/books/operations";
+import {
+  startReading,
+  finishReading,
+  deleteReading,
+  fetchOwnBooks,
+} from "../../redux/books/operations";
 import { selectOwnBooks } from "../../redux/books/selectors";
 
 import styleContainer from "../../pages/dashboard/Dashboard.module.css";
@@ -18,7 +23,7 @@ import styles from "./Reading.module.css";
 export const Reading = () => {
   const { bookId } = useParams();
   const dispatch = useDispatch();
-  
+
   const userBooks = useSelector(selectOwnBooks) || [];
   const book = userBooks.find((b) => (b._id || b.id) === bookId);
 
@@ -36,7 +41,9 @@ export const Reading = () => {
     return <div className={styles.loading}>Loading book data...</div>;
   }
 
-  const isReading = book.status === "in-progress" && book.progress?.some((p) => p.status === "active");
+  const isReading =
+    book.status === "in-progress" &&
+    book.progress?.some((p) => p.status === "active");
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -55,7 +62,9 @@ export const Reading = () => {
     if (!isReading) {
       // TO START
       try {
-        await dispatch(startReading({ id: book._id || book.id, page: pageNum })).unwrap();
+        await dispatch(
+          startReading({ id: book._id || book.id, page: pageNum }),
+        ).unwrap();
         toast.success("Reading started!");
         setPage("");
       } catch (err) {
@@ -64,7 +73,9 @@ export const Reading = () => {
     } else {
       // TO STOP
       try {
-        await dispatch(finishReading({ id: book._id || book.id, page: pageNum })).unwrap();
+        await dispatch(
+          finishReading({ id: book._id || book.id, page: pageNum }),
+        ).unwrap();
         toast.success("Reading stopped!");
         setPage("");
 
@@ -80,7 +91,9 @@ export const Reading = () => {
 
   const handleDeleteSession = async (sessionId) => {
     try {
-      await dispatch(deleteReading({ bookId: book._id || book.id, sessionId })).unwrap();
+      await dispatch(
+        deleteReading({ bookId: book._id || book.id, sessionId }),
+      ).unwrap();
       toast.success("Session deleted.");
     } catch (err) {
       toast.error(err || "Failed to delete session.");
@@ -93,7 +106,6 @@ export const Reading = () => {
         <Navigation />
         <div className={styles.ContentWrapper}>
           <div className={styles.container}>
-            {/* Sol Panel: Form + Details */}
             <aside className={styles.sidebar}>
               <AddReading
                 page={page}
@@ -108,7 +120,6 @@ export const Reading = () => {
                 onDeleteSession={handleDeleteSession}
               />
             </aside>
-
             <main className={styles.mainContent}>
               <h2 className={styles.pageTitle}>My reading</h2>
               <MyBook book={book} isReading={isReading} />

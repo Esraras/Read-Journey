@@ -3,6 +3,25 @@ import styles from "../../pages/reading/Reading.module.css";
 export const Details = ({ book, activeTab, setActiveTab, onDeleteSession }) => {
   const progress = book.progress || [];
 
+  const hasStarted = progress.length > 0;
+
+  if (!hasStarted) {
+    return (
+      <div className={styles.detailsCard}>
+        <div className={styles.progressEmptyState}>
+          <h3>Progress</h3>
+          <p className={styles.infoText}>
+            Here you will see when and how much you read.
+            <br />
+            To record, click on the red button above.
+          </p>
+          <div className={styles.starIconContainer}>
+            <span className={styles.starIcon}>🌟</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className={styles.detailsCard}>
       <div className={styles.detailsHeader}>
@@ -24,7 +43,6 @@ export const Details = ({ book, activeTab, setActiveTab, onDeleteSession }) => {
           </button>
         </div>
       </div>
-
       {activeTab === "diary" ? (
         <div className={styles.diaryContent}>
           {progress.length === 0 ? (
@@ -33,7 +51,9 @@ export const Details = ({ book, activeTab, setActiveTab, onDeleteSession }) => {
             </p>
           ) : (
             progress.map((session) => {
-              const pagesRead = session.finishPage ? session.finishPage - session.startPage : 0;
+              const pagesRead = session.finishPage
+                ? session.finishPage - session.startPage
+                : 0;
               const percent = ((pagesRead / book.totalPages) * 100).toFixed(1);
 
               return (
@@ -61,7 +81,16 @@ export const Details = ({ book, activeTab, setActiveTab, onDeleteSession }) => {
         <div className={styles.statsContent}>
           <div className={styles.circleProgress}>
             <div className={styles.percentText}>
-              {(((book.progress?.reduce((acc, curr) => acc + ((curr.finishPage || 0) - curr.startPage), 0) || 0) / book.totalPages) * 100).toFixed(0)}%
+              {(
+                ((book.progress?.reduce(
+                  (acc, curr) =>
+                    acc + ((curr.finishPage || 0) - curr.startPage),
+                  0,
+                ) || 0) /
+                  book.totalPages) *
+                100
+              ).toFixed(0)}
+              %
             </div>
           </div>
           <p className={styles.infoText}>
