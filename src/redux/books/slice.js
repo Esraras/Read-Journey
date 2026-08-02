@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 import {
   fetchRecommendedBooks,
   fetchOwnBooks,
@@ -9,7 +9,7 @@ import {
   startReading,
   finishReading,
   deleteReading,
-} from './operations';
+} from "./operations";
 
 const initialState = {
   recommended: [],
@@ -32,7 +32,7 @@ const handleRejected = (state, action) => {
 };
 
 const booksSlice = createSlice({
-  name: 'books',
+  name: "books",
   initialState,
   reducers: {
     clearCurrentBook(state) {
@@ -88,20 +88,38 @@ const booksSlice = createSlice({
       .addCase(deleteBook.fulfilled, (state, action) => {
         state.isLoading = false;
         state.ownBooks = state.ownBooks.filter(
-          (book) => book._id !== action.payload.id
+          (book) => book._id !== action.payload.id,
         );
       })
       .addCase(deleteBook.rejected, handleRejected)
 
       // Reading Operations (Start / Finish / Delete Session)
       .addCase(startReading.fulfilled, (state, action) => {
-        state.currentBook = action.payload;
+        const updatedBook = action.payload;
+        const index = state.ownBooks.findIndex(
+          (b) => (b._id || b.id) === (updatedBook._id || updatedBook.id),
+        );
+        if (index !== -1) {
+          state.ownBooks[index] = updatedBook;
+        }
       })
       .addCase(finishReading.fulfilled, (state, action) => {
-        state.currentBook = action.payload;
+        const updatedBook = action.payload;
+        const index = state.ownBooks.findIndex(
+          (b) => (b._id || b.id) === (updatedBook._id || updatedBook.id),
+        );
+        if (index !== -1) {
+          state.ownBooks[index] = updatedBook;
+        }
       })
       .addCase(deleteReading.fulfilled, (state, action) => {
-        state.currentBook = action.payload;
+        const updatedBook = action.payload;
+        const index = state.ownBooks.findIndex(
+          (b) => (b._id || b.id) === (updatedBook._id || updatedBook.id),
+        );
+        if (index !== -1) {
+          state.ownBooks[index] = updatedBook;
+        }
       });
   },
 });

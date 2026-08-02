@@ -1,8 +1,16 @@
 import styles from "../../pages/reading/Reading.module.css";
 
-export const Details = ({ book, activeTab, setActiveTab, onDeleteSession }) => {
+export const Details = ({ book, activeTab, setActiveTab, onDeleteSession, isCompleted }) => {
 
   const progress = book.progress || [];
+  const totalReadPages = progress.reduce((acc, curr) => {
+    const pagesRead = Math.max(0, (curr.finishPage || 0) - (curr.startPage || 0));
+    return acc + pagesRead;
+  }, 0);
+  const progressPercent = Math.max(
+    0,
+    Math.min(100, Math.round((totalReadPages / Math.max(1, book.totalPages)) * 100)),
+  );
 
   const hasStarted = progress.length > 0;
 
@@ -107,9 +115,18 @@ export const Details = ({ book, activeTab, setActiveTab, onDeleteSession }) => {
                             <div className={styles.graphContainer}>
                               <div className={styles.greenBar}></div>
                               <button
-                                onClick={() => onDeleteSession(session._id || session.id)}
-                                className={styles.deleteBtn}
-                                title="Delete"
+                                onClick={() =>
+                                  onDeleteSession(session._id || session.id)
+                                }
+                                className={`${styles.deleteBtn} ${
+                                  isCompleted ? styles.disabledBtn : ""
+                                }`}
+                                disabled={isCompleted}
+                                title={
+                                  isCompleted
+                                    ? "Completed sessions cannot be deleted"
+                                    : "Delete"
+                                }
                               >
                                 🗑️
                               </button>
@@ -129,19 +146,13 @@ export const Details = ({ book, activeTab, setActiveTab, onDeleteSession }) => {
         </div>
       ) : (
         <div className={styles.statsContent}>
-          <div className={styles.circleProgress}>
-            <div className={styles.percentText}>
-              {(
-                ((book.progress?.reduce(
-                  (acc, curr) =>
-                    acc + ((curr.finishPage || 0) - curr.startPage),
-                  0,
-                ) || 0) /
-                  book.totalPages) *
-                100
-              ).toFixed(0)}
-              %
-            </div>
+          <div
+            className={styles.circleProgress}
+            style={{
+              "--progress": `${progressPercent}%`,
+            }}
+          >
+            <div className={styles.percentText}>{progressPercent}%</div>
           </div>
           <p className={styles.infoText}>
             Each page read moves you closer to new knowledge.

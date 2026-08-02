@@ -198,6 +198,69 @@
   color: #ffffff;
 }
 
+/* Progress empty state */
+.progressEmptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}
+
+.progressEmptyState h3 {
+  margin: 0;
+  font-size: 20px;
+  color: #ffffff;
+}
+
+.starIconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.starIcon {
+  font-size: 28px;
+}
+
+.statsContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding-top: 8px;
+}
+
+.circleProgress {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at center, #1f1f1f 0 56%, transparent 56%),
+    conic-gradient(#30b94d var(--progress), #333333 0);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+.percentText {
+  font-size: 34px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.infoText {
+  margin: 0;
+  color: #a8a8a8;
+  font-size: 14px;
+  line-height: 1.6;
+  text-align: center;
+}
+
 /* Diary Grouping Styles */
 .diaryContent {
   display: flex;
@@ -320,6 +383,10 @@
 
 .deleteBtn:hover {
   opacity: 1;
+}
+.disabledBtn {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 .sessionSpeed {

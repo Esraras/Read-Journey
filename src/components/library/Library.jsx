@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import ReadingModal from "../readingModal/ReadingModal";
 import { BookAddedModal } from "../bookAddedModal/BookAddedModal";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 
 import {
   addBook,
@@ -74,11 +74,9 @@ export const Library = () => {
       selectedBook?.status === "in-progress" ||
       selectedBook?.status === "active"
     ) {
-      toast.error("You have already started reading this book", {
-        position: "top-right",
-      });
+      toast.error("You have already started reading this book");
       setSelectedBook(null);
-      navigate(`/reading/${bookId}`); 
+      navigate(`/reading/${bookId}`);
       return;
     }
 
@@ -89,10 +87,7 @@ export const Library = () => {
     } catch (error) {
       console.error("Start reading error:", error);
 
-      toast.error("You have already started reading this book", {
-        position: "top-right",
-      });
-      
+      toast.error("You have already started reading this book");
       setSelectedBook(null);
       navigate(`/reading/${bookId}`);
     }

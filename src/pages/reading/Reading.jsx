@@ -45,7 +45,7 @@ export const Reading = () => {
     book.status === "in-progress" &&
     book.progress?.some((p) => p.status === "active");
 
-    const isCompleted = book.status === "done";
+  const isCompleted = book.status === "done";
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -55,7 +55,7 @@ export const Reading = () => {
       toast.error("This book is already finished!");
       return;
     }
-    
+
     if (!pageNum || pageNum <= 0) {
       toast.error("Please enter a valid page number.");
       return;
@@ -97,13 +97,27 @@ export const Reading = () => {
   };
 
   const handleDeleteSession = async (readingId) => {
+    // 1. Ön Kontrol: Kitap zaten tamamlandıysa isteği hiç gönderme
+    if (isCompleted) {
+      toast.error("Completed book sessions cannot be deleted.");
+      return;
+    }
+
     try {
       await dispatch(
         deleteReading({ bookId: book._id || book.id, readingId }),
       ).unwrap();
       toast.success("Session deleted.");
     } catch (err) {
-      toast.error(err || "Failed to delete session.");
+      // 2. Güvenli Hata Mesajı Alma (err bir obje olsa dahi doğru string'i basar)
+      const errorMessage =
+        typeof err === "string"
+          ? err
+          : err?.message ||
+            err?.response?.data?.message ||
+            "Failed to delete session.";
+
+      toast.error(errorMessage);
     }
   };
 
@@ -125,6 +139,7 @@ export const Reading = () => {
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}
                 onDeleteSession={handleDeleteSession}
+                isCompleted={isCompleted}
               />
             </aside>
             <main className={styles.mainContent}>

@@ -1,6 +1,7 @@
 import "./App.css";
 import { Suspense } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 import PrivateRoute from "./routes/PrivateRoute";
 import PublicRoute from "./routes/PublicRoute";
 import { Login } from "./pages/login/Login";
@@ -23,52 +24,55 @@ function App() {
   }, [dispatch, token]);
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <Routes>
-        <Route
-          path="/library"
-          element={
-            <PrivateRoute>
-              <Library />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/reading/:bookId"
-          element={
-            <PrivateRoute>
-              <Reading />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/"
-          element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        ></Route>
-        <Route
-          path="login"
-          element={
-            <PublicRoute>
-              <Login />
-            </PublicRoute>
-          }
-        />
-        <Route
-          path="register"
-          element={
-            <PublicRoute>
-              <Register />
-            </PublicRoute>
-          }
-        />
+    <>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route
+            path="/library"
+            element={
+              <PrivateRoute>
+                <Library />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/reading/:bookId"
+            element={
+              <PrivateRoute>
+                <Reading />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          ></Route>
+          <Route
+            path="login"
+            element={
+              <PublicRoute>
+                <Login />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="register"
+            element={
+              <PublicRoute>
+                <Register />
+              </PublicRoute>
+            }
+          />
 
-        <Route path="*" element={<Navigate to="/" />}></Route>
-      </Routes>
-    </Suspense>
+          <Route path="*" element={<Navigate to="/" />}></Route>
+        </Routes>
+      </Suspense>
+      <Toaster position="top-right" reverseOrder={false} />
+    </>
   );
 }
 
