@@ -8,7 +8,7 @@ export const AuthLayout = ({ children }) => {
         <div className={styles.formSection}>
           <div className={styles.logo}>
             <svg width="24" height="17">
-              <use href="../../../image/icons.svg#icon-logo"></use>
+              <use href="/image/icons.svg#icon-logo"></use>
             </svg>
             <span>READ JOURNEY</span>
           </div>
@@ -24,7 +24,7 @@ export const AuthLayout = ({ children }) => {
         {/* Sağ / Alt Görsel Alanı */}
         <div className={styles.previewSection}>
           <img
-            src="../../../image/iphone-mockup.png"
+            src="/image/iphone-mockup.png"
             alt="App Preview"
             className={styles.mockupImg}
           />
